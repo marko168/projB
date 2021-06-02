@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="userInterface.Views.RadnikView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:userInterface.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid >
+        <Button Command="{Binding ShowAddFields_}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="10,10,0,0">Dodaj</Button>
+        <Button Command="{Binding ShowEditFields_}" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="220,10,0,0">Izmjeni</Button>
+        <Button Command="{Binding Delete_}" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="430,10,0,0">Izbrisi</Button>
+        <Button Command="{Binding Recepcioneri_}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="250" Margin="10,50,0,0">Recepcioneri</Button>
+        <Button Command="{Binding Cuvari_}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="250" Margin="275,50,0,0">Cuvari</Button>
+        <Button Command="{Binding Konobari_}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="250" Margin="540,50,0,0">Konobari</Button>
+
+        <DataGrid Margin="10,90,10,250" CanUserAddRows="False" CanUserDeleteRows="False" Background="AntiqueWhite" ItemsSource="{Binding Radnici}" SelectedItem="{Binding SelectedRadnik}" Visibility="{Binding ShowRadnik}" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding JMBG}"/>
+                <DataGridTextColumn Header="Ime" Width="*" Binding="{Binding Ime}"/>
+                <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Prezime}"/>
+                <DataGridTextColumn Header="Adresa" Width="*" Binding="{Binding Adresa}"/>
+                <DataGridTextColumn Header="Broj Telefona" Width="*" Binding="{Binding Br_Tel}"/>
+                <DataGridTextColumn Header="Nadredjeni" Width="*" Binding="{Binding Nadredjeni.Ime}"/>
+                <DataGridTextColumn Header="Id hotela" Width="*" Binding="{Binding Hotel.Naziv}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Margin="10,90,10,250" CanUserAddRows="False" CanUserDeleteRows="False" Background="AntiqueWhite" ItemsSource="{Binding Recepcioneri}" SelectedItem="{Binding SelectedRadnik}" Visibility="{Binding ShowRecepcioner}" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding JMBG}"/>
+                <DataGridTextColumn Header="Ime" Width="*" Binding="{Binding Ime}"/>
+                <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Prezime}"/>
+                <DataGridTextColumn Header="Adresa" Width="*" Binding="{Binding Adresa}"/>
+                <DataGridTextColumn Header="Broj Telefona" Width="*" Binding="{Binding Br_Tel}"/>
+                <DataGridTextColumn Header="Nadredjeni" Width="*" Binding="{Binding Nadredjeni.Ime}"/>
+                <DataGridTextColumn Header="Id hotela" Width="*" Binding="{Binding Hotel.Naziv}"/>
+                <DataGridTextColumn Header="Smjena" Width="*" Binding="{Binding Smjena.Naz_Smjene}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Visibility="{Binding Visible}">
+            <Label Margin="20,0,0,210" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Ime:</Label>
+            <Label Margin="20,0,0,180" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Prezime:</Label>
+            <Label Margin="20,0,0,150" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Adresa:</Label>
+            <Label Margin="20,0,0,120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Broj telefona:</Label>
+            <Label Margin="20,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Nadredjeni:</Label>
+            <Label Margin="20,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Hotel:</Label>
+            <Label Margin="20,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130" Visibility="{Binding ShowAdd}">Uloga:</Label>
+            <Label Margin="20,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130" Visibility="{Binding ShowSmjenu}">Smjena:</Label>
+
+            <TextBox Margin="160,0,0,210" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Ime}"></TextBox>
+            <TextBox Margin="160,0,0,180" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Prezime}"></TextBox>
+            <TextBox Margin="160,0,0,150" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Adresa}"></TextBox>
+            <TextBox Margin="160,0,0,120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Br_Tel}"></TextBox>
+            <ComboBox Margin="160,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" ItemsSource="{Binding Sefovi}" SelectedItem="{Binding SelectedSef}" DisplayMemberPath="Ime"></ComboBox>
+            <ComboBox Margin="160,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" ItemsSource="{Binding Hoteli}" SelectedItem="{Binding SelectedHotel}" DisplayMemberPath="Naziv"></ComboBox>
+            <ComboBox Margin="160,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" ItemsSource="{Binding Uloge}" SelectedItem="{Binding SelectedUloga}" Visibility="{Binding ShowAdd}"></ComboBox>
+            <ComboBox Margin="160,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" ItemsSource="{Binding Smjene}" SelectedItem="{Binding SelectedSmjena}" Visibility="{Binding ShowSmjenu}" DisplayMemberPath="Naz_Smjene"></ComboBox>
+
+            <Button Margin="500,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Command="{Binding Add_}" Visibility="{Binding ShowAdd}">Potvrdi</Button>
+            <Button Margin="500,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Command="{Binding Edit_}" Visibility="{Binding ShowEdit}">Potvrdi</Button>
+        </Grid>
+    </Grid>
+</UserControl>

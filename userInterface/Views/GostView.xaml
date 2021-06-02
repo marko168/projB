@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="userInterface.Views.GostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:userInterface.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid >
+        <Button Command="{Binding ShowAddFields_}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="10,10,0,0">Dodaj</Button>
+        <Button Command="{Binding ShowEditFields_}" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="220,10,0,0">Izmjeni</Button>
+        <Button Command="{Binding Delete_}" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="430,10,0,0">Izbrisi</Button>
+
+        <DataGrid Margin="10,50,10,160" CanUserAddRows="False" CanUserDeleteRows="False" Background="AntiqueWhite" ItemsSource="{Binding Gosti}" SelectedItem="{Binding SelectedGost}" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="MBR" Width="*" Binding="{Binding MBR}"/>
+                <DataGridTextColumn Header="Adresa" Width="*" Binding="{Binding Adresa}"/>
+                <DataGridTextColumn Header="Kontakt" Width="*" Binding="{Binding Kontakt}"/>
+                <DataGridTextColumn Header="Datum prijave" Width="*" Binding="{Binding Datum_P,StringFormat='yyyy-MM-dd'}"/>
+                <DataGridTextColumn Header="Vrijeme prijave" Width="*" Binding="{Binding Vrijeme_P}"/>
+                <DataGridTextColumn Header="Recepcija prijave" Width="*" Binding="{Binding Recepcija.Br_Rec}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Visibility="{Binding Visible}">
+            <Label Margin="20,0,0,120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Adresa:</Label>
+            <Label Margin="20,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Kontakt:</Label>
+            <Label Margin="20,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Datum prijave:</Label>
+            <Label Margin="20,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Vrijeme prijave:(hh:mm:ss)</Label>
+            <Label Margin="20,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Recepcija:</Label>
+
+            <TextBox Margin="160,0,0,120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Adresa}"></TextBox>
+            <TextBox Margin="160,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Kontakt}"></TextBox>
+            <DatePicker Margin="160,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" SelectedDate="{Binding Datum_P}"></DatePicker>
+            <TextBox Margin="160,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Vrijeme_P}"></TextBox>
+            <ComboBox Margin="160,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" ItemsSource="{Binding Recepcije}" SelectedItem="{Binding SelectedRecepcija}" DisplayMemberPath="Br_Rec"></ComboBox>
+
+            <Button Margin="500,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Command="{Binding Add_}" Visibility="{Binding ShowAdd}">Potvrdi</Button>
+            <Button Margin="500,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Command="{Binding Edit_}" Visibility="{Binding ShowEdit}">Potvrdi</Button>
+        </Grid>
+    </Grid>
+</UserControl>

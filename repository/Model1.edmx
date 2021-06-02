@@ -1,0 +1,708 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Gosts" EntityType="Model1.Store.Gosts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hotels" EntityType="Model1.Store.Hotels" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Radniks" EntityType="Model1.Store.Radniks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Smjenas" EntityType="Model1.Store.Smjenas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Recepcijas" EntityType="Model1.Store.Recepcijas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sobas" EntityType="Model1.Store.Sobas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Smjestajs" EntityType="Model1.Store.Smjestajs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Radniks_Recepcioner" EntityType="Model1.Store.Radniks_Recepcioner" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Radniks_Konobar" EntityType="Model1.Store.Radniks_Konobar" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Radniks_Cuvar" EntityType="Model1.Store.Radniks_Cuvar" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="HotelRecepcija" Association="Model1.Store.HotelRecepcija">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="Recepcija" EntitySet="Recepcijas" />
+    </AssociationSet>
+    <AssociationSet Name="GostSmjestaj" Association="Model1.Store.GostSmjestaj">
+      <End Role="Gost" EntitySet="Gosts" />
+      <End Role="Smjestaj" EntitySet="Smjestajs" />
+    </AssociationSet>
+    <AssociationSet Name="HotelRadnik" Association="Model1.Store.HotelRadnik">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="Radnik" EntitySet="Radniks" />
+    </AssociationSet>
+    <AssociationSet Name="RecepcionerSmjena" Association="Model1.Store.RecepcionerSmjena">
+      <End Role="Recepcioner" EntitySet="Radniks_Recepcioner" />
+      <End Role="Smjena" EntitySet="Smjenas" />
+    </AssociationSet>
+    <AssociationSet Name="HotelSoba" Association="Model1.Store.HotelSoba">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="Soba" EntitySet="Sobas" />
+    </AssociationSet>
+    <AssociationSet Name="SmjestajSoba" Association="Model1.Store.SmjestajSoba">
+      <End Role="Smjestaj" EntitySet="Smjestajs" />
+      <End Role="Soba" EntitySet="Sobas" />
+    </AssociationSet>
+    <AssociationSet Name="RadnikRadnik" Association="Model1.Store.RadnikRadnik">
+      <End Role="Radnik" EntitySet="Radniks" />
+      <End Role="Radnik1" EntitySet="Radniks" />
+    </AssociationSet>
+    <AssociationSet Name="RecepcijaRecepcioner" Association="Model1.Store.RecepcijaRecepcioner">
+      <End Role="Recepcija" EntitySet="Recepcijas" />
+      <End Role="Recepcioner" EntitySet="Radniks_Recepcioner" />
+    </AssociationSet>
+    <AssociationSet Name="GostRecepcija" Association="Model1.Store.GostRecepcija">
+      <End Role="Gost" EntitySet="Gosts" />
+      <End Role="Recepcija" EntitySet="Recepcijas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recepcioner_inherits_Radnik" Association="Model1.Store.FK_Recepcioner_inherits_Radnik">
+      <End Role="Radnik" EntitySet="Radniks" />
+      <End Role="Recepcioner" EntitySet="Radniks_Recepcioner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Konobar_inherits_Radnik" Association="Model1.Store.FK_Konobar_inherits_Radnik">
+      <End Role="Radnik" EntitySet="Radniks" />
+      <End Role="Konobar" EntitySet="Radniks_Konobar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuvar_inherits_Radnik" Association="Model1.Store.FK_Cuvar_inherits_Radnik">
+      <End Role="Radnik" EntitySet="Radniks" />
+      <End Role="Cuvar" EntitySet="Radniks_Cuvar" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Gosts">
+    <Key>
+      <PropertyRef Name="MBR" />
+    </Key>
+    <Property Name="MBR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adresa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Kontakt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Datum_P" Type="datetime" Nullable="false" />
+    <Property Name="Vrijeme_P" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RecepcijaBr_Rec" Type="int" Nullable="true" />
+    <Property Name="RecepcijaHotelId_Hot" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Hotels">
+    <Key>
+      <PropertyRef Name="Id_Hot" />
+    </Key>
+    <Property Name="Id_Hot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adresa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Kategorija" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Br_Racuna" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefon" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Radniks">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adresa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Br_Tel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RadnikJMBG" Type="int" Nullable="false" />
+    <Property Name="HotelId_Hot" Type="int" Nullable="false" />
+    <Property Name="RadnikJMBG1" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Smjenas">
+    <Key>
+      <PropertyRef Name="Id_Smjene" />
+    </Key>
+    <Property Name="Id_Smjene" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naz_Smjene" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nap_Smjene" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Vrijeme_Od" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Vrijeme_Do" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Recepcijas">
+    <Key>
+      <PropertyRef Name="Br_Rec" />
+      <PropertyRef Name="HotelId_Hot" />
+    </Key>
+    <Property Name="Br_Rec" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Lokal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Mjesto_Rec" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HotelId_Hot" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sobas">
+    <Key>
+      <PropertyRef Name="Br_Sobe" />
+      <PropertyRef Name="HotelId_Hot" />
+    </Key>
+    <Property Name="Br_Sobe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tip" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Opis" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Napomena" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HotelId_Hot" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Smjestajs">
+    <Key>
+      <PropertyRef Name="Id_Smjestaj" />
+    </Key>
+    <Property Name="Id_Smjestaj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GostMBR" Type="int" Nullable="false" />
+    <Property Name="SobaBr_Sobe" Type="int" Nullable="false" />
+    <Property Name="SobaHotelId_Hot" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Radniks_Recepcioner">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="int" Nullable="false" />
+    <Property Name="Smjena_Id_Smjene" Type="int" Nullable="false" />
+    <Property Name="Recepcija_Br_Rec" Type="int" Nullable="true" />
+    <Property Name="Recepcija_HotelId_Hot" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Radniks_Konobar">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Radniks_Cuvar">
+    <Key>
+      <PropertyRef Name="JMBG" />
+    </Key>
+    <Property Name="JMBG" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="HotelRecepcija">
+    <End Role="Hotel" Type="Model1.Store.Hotels" Multiplicity="1" />
+    <End Role="Recepcija" Type="Model1.Store.Recepcijas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Id_Hot" />
+      </Principal>
+      <Dependent Role="Recepcija">
+        <PropertyRef Name="HotelId_Hot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GostSmjestaj">
+    <End Role="Gost" Type="Model1.Store.Gosts" Multiplicity="1" />
+    <End Role="Smjestaj" Type="Model1.Store.Smjestajs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gost">
+        <PropertyRef Name="MBR" />
+      </Principal>
+      <Dependent Role="Smjestaj">
+        <PropertyRef Name="GostMBR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HotelRadnik">
+    <End Role="Hotel" Type="Model1.Store.Hotels" Multiplicity="1" />
+    <End Role="Radnik" Type="Model1.Store.Radniks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Id_Hot" />
+      </Principal>
+      <Dependent Role="Radnik">
+        <PropertyRef Name="HotelId_Hot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RecepcionerSmjena">
+    <End Role="Recepcioner" Type="Model1.Store.Radniks_Recepcioner" Multiplicity="*" />
+    <End Role="Smjena" Type="Model1.Store.Smjenas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Smjena">
+        <PropertyRef Name="Id_Smjene" />
+      </Principal>
+      <Dependent Role="Recepcioner">
+        <PropertyRef Name="Smjena_Id_Smjene" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HotelSoba">
+    <End Role="Hotel" Type="Model1.Store.Hotels" Multiplicity="1" />
+    <End Role="Soba" Type="Model1.Store.Sobas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Id_Hot" />
+      </Principal>
+      <Dependent Role="Soba">
+        <PropertyRef Name="HotelId_Hot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SmjestajSoba">
+    <End Role="Smjestaj" Type="Model1.Store.Smjestajs" Multiplicity="*" />
+    <End Role="Soba" Type="Model1.Store.Sobas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Soba">
+        <PropertyRef Name="Br_Sobe" />
+        <PropertyRef Name="HotelId_Hot" />
+      </Principal>
+      <Dependent Role="Smjestaj">
+        <PropertyRef Name="SobaBr_Sobe" />
+        <PropertyRef Name="SobaHotelId_Hot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RadnikRadnik">
+    <End Role="Radnik" Type="Model1.Store.Radniks" Multiplicity="0..1" />
+    <End Role="Radnik1" Type="Model1.Store.Radniks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Radnik1">
+        <PropertyRef Name="RadnikJMBG1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RecepcijaRecepcioner">
+    <End Role="Recepcija" Type="Model1.Store.Recepcijas" Multiplicity="0..1" />
+    <End Role="Recepcioner" Type="Model1.Store.Radniks_Recepcioner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recepcija">
+        <PropertyRef Name="Br_Rec" />
+        <PropertyRef Name="HotelId_Hot" />
+      </Principal>
+      <Dependent Role="Recepcioner">
+        <PropertyRef Name="Recepcija_Br_Rec" />
+        <PropertyRef Name="Recepcija_HotelId_Hot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GostRecepcija">
+    <End Role="Gost" Type="Model1.Store.Gosts" Multiplicity="*" />
+    <End Role="Recepcija" Type="Model1.Store.Recepcijas" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Recepcija">
+        <PropertyRef Name="Br_Rec" />
+        <PropertyRef Name="HotelId_Hot" />
+      </Principal>
+      <Dependent Role="Gost">
+        <PropertyRef Name="RecepcijaBr_Rec" />
+        <PropertyRef Name="RecepcijaHotelId_Hot" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recepcioner_inherits_Radnik">
+    <End Role="Radnik" Type="Model1.Store.Radniks" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Recepcioner" Type="Model1.Store.Radniks_Recepcioner" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Recepcioner">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Konobar_inherits_Radnik">
+    <End Role="Radnik" Type="Model1.Store.Radniks" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Konobar" Type="Model1.Store.Radniks_Konobar" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Konobar">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuvar_inherits_Radnik">
+    <End Role="Radnik" Type="Model1.Store.Radniks" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Cuvar" Type="Model1.Store.Radniks_Cuvar" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="JMBG" />
+      </Principal>
+      <Dependent Role="Cuvar">
+        <PropertyRef Name="JMBG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Gosts" EntityType="Model1.Gost" />
+          <EntitySet Name="Hotels" EntityType="Model1.Hotel" />
+          <EntitySet Name="Radniks" EntityType="Model1.Radnik" />
+          <EntitySet Name="Smjenas" EntityType="Model1.Smjena" />
+          <EntitySet Name="Recepcijas" EntityType="Model1.Recepcija" />
+          <EntitySet Name="Sobas" EntityType="Model1.Soba" />
+          <AssociationSet Name="HotelRecepcija" Association="Model1.HotelRecepcija">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Recepcija" EntitySet="Recepcijas" />
+          </AssociationSet>
+          <EntitySet Name="Smjestajs" EntityType="Model1.Smjestaj" />
+          <AssociationSet Name="GostSmjestaj" Association="Model1.GostSmjestaj">
+            <End Role="Gost" EntitySet="Gosts" />
+            <End Role="Smjestaj" EntitySet="Smjestajs" />
+          </AssociationSet>
+          <AssociationSet Name="HotelRadnik" Association="Model1.HotelRadnik">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Radnik" EntitySet="Radniks" />
+          </AssociationSet>
+          <AssociationSet Name="RecepcionerSmjena" Association="Model1.RecepcionerSmjena">
+            <End Role="Recepcioner" EntitySet="Radniks" />
+            <End Role="Smjena" EntitySet="Smjenas" />
+          </AssociationSet>
+          <AssociationSet Name="HotelSoba" Association="Model1.HotelSoba">
+            <End Role="Hotel" EntitySet="Hotels" />
+            <End Role="Soba" EntitySet="Sobas" />
+          </AssociationSet>
+          <AssociationSet Name="SmjestajSoba" Association="Model1.SmjestajSoba">
+            <End Role="Smjestaj" EntitySet="Smjestajs" />
+            <End Role="Soba" EntitySet="Sobas" />
+          </AssociationSet>
+          <AssociationSet Name="RadnikRadnik" Association="Model1.RadnikRadnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="Radnik1" EntitySet="Radniks" />
+          </AssociationSet>
+          <AssociationSet Name="RecepcijaRecepcioner" Association="Model1.RecepcijaRecepcioner">
+            <End Role="Recepcija" EntitySet="Recepcijas" />
+            <End Role="Recepcioner" EntitySet="Radniks" />
+          </AssociationSet>
+          <AssociationSet Name="GostRecepcija" Association="Model1.GostRecepcija">
+            <End Role="Gost" EntitySet="Gosts" />
+            <End Role="Recepcija" EntitySet="Recepcijas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Gost">
+          <Key>
+            <PropertyRef Name="MBR" />
+          </Key>
+          <Property Name="MBR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adresa" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Kontakt" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Datum_P" Type="DateTime" Nullable="false" />
+          <Property Name="Vrijeme_P" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Smjestaj" Relationship="Model1.GostSmjestaj" FromRole="Gost" ToRole="Smjestaj" />
+          <NavigationProperty Name="Recepcija" Relationship="Model1.GostRecepcija" FromRole="Gost" ToRole="Recepcija" />
+          <Property Name="RecepcijaBr_Rec" Type="Int32" Nullable="true" />
+          <Property Name="RecepcijaHotelId_Hot" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="Id_Hot" />
+          </Key>
+          <Property Name="Id_Hot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Adresa" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Kategorija" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Br_Racuna" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Telefon" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Recepcije" Relationship="Model1.HotelRecepcija" FromRole="Hotel" ToRole="Recepcija" />
+          <NavigationProperty Name="Radnici" Relationship="Model1.HotelRadnik" FromRole="Hotel" ToRole="Radnik" />
+          <NavigationProperty Name="Sobe" Relationship="Model1.HotelSoba" FromRole="Hotel" ToRole="Soba" />
+        </EntityType>
+        <EntityType Name="Radnik">
+          <Key>
+            <PropertyRef Name="JMBG" />
+          </Key>
+          <Property Name="JMBG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Prezime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Adresa" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Br_Tel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RadnikJMBG" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hotel" Relationship="Model1.HotelRadnik" FromRole="Radnik" ToRole="Hotel" />
+          <Property Name="HotelId_Hot" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Podredjeni" Relationship="Model1.RadnikRadnik" FromRole="Radnik" ToRole="Radnik1" />
+          <NavigationProperty Name="Nadredjeni" Relationship="Model1.RadnikRadnik" FromRole="Radnik1" ToRole="Radnik" />
+          <Property Name="RadnikJMBG1" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Smjena">
+          <Key>
+            <PropertyRef Name="Id_Smjene" />
+          </Key>
+          <Property Name="Id_Smjene" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naz_Smjene" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Nap_Smjene" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Vrijeme_Od" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Vrijeme_Do" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Recepcioners" Relationship="Model1.RecepcionerSmjena" FromRole="Smjena" ToRole="Recepcioner" />
+        </EntityType>
+        <EntityType Name="Recepcija">
+          <Key>
+            <PropertyRef Name="Br_Rec" />
+            <PropertyRef Name="HotelId_Hot" />
+          </Key>
+          <Property Name="Br_Rec" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lokal" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Mjesto_Rec" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Hotel" Relationship="Model1.HotelRecepcija" FromRole="Recepcija" ToRole="Hotel" />
+          <Property Name="HotelId_Hot" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Recepcioner" Relationship="Model1.RecepcijaRecepcioner" FromRole="Recepcija" ToRole="Recepcioner" />
+          <NavigationProperty Name="Gosts" Relationship="Model1.GostRecepcija" FromRole="Recepcija" ToRole="Gost" />
+        </EntityType>
+        <EntityType Name="Soba">
+          <Key>
+            <PropertyRef Name="Br_Sobe" />
+            <PropertyRef Name="HotelId_Hot" />
+          </Key>
+          <Property Name="Br_Sobe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tip" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Napomena" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Hotel" Relationship="Model1.HotelSoba" FromRole="Soba" ToRole="Hotel" />
+          <Property Name="HotelId_Hot" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Smjestajs" Relationship="Model1.SmjestajSoba" FromRole="Soba" ToRole="Smjestaj" />
+        </EntityType>
+        <Association Name="HotelRecepcija">
+          <End Type="Model1.Hotel" Role="Hotel" Multiplicity="1" />
+          <End Type="Model1.Recepcija" Role="Recepcija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Id_Hot" />
+            </Principal>
+            <Dependent Role="Recepcija">
+              <PropertyRef Name="HotelId_Hot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Smjestaj">
+          <Key>
+            <PropertyRef Name="Id_Smjestaj" />
+          </Key>
+          <Property Name="Id_Smjestaj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Gost" Relationship="Model1.GostSmjestaj" FromRole="Smjestaj" ToRole="Gost" />
+          <Property Name="GostMBR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Soba" Relationship="Model1.SmjestajSoba" FromRole="Smjestaj" ToRole="Soba" />
+          <Property Name="SobaBr_Sobe" Type="Int32" Nullable="false" />
+          <Property Name="SobaHotelId_Hot" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="GostSmjestaj">
+          <End Type="Model1.Gost" Role="Gost" Multiplicity="1" />
+          <End Type="Model1.Smjestaj" Role="Smjestaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gost">
+              <PropertyRef Name="MBR" />
+            </Principal>
+            <Dependent Role="Smjestaj">
+              <PropertyRef Name="GostMBR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HotelRadnik">
+          <End Type="Model1.Hotel" Role="Hotel" Multiplicity="1" />
+          <End Type="Model1.Radnik" Role="Radnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Id_Hot" />
+            </Principal>
+            <Dependent Role="Radnik">
+              <PropertyRef Name="HotelId_Hot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Konobar" BaseType="Model1.Radnik" />
+        <EntityType Name="Cuvar" BaseType="Model1.Radnik" />
+        <EntityType Name="Recepcioner" BaseType="Model1.Radnik" >
+          <NavigationProperty Name="Smjena" Relationship="Model1.RecepcionerSmjena" FromRole="Recepcioner" ToRole="Smjena" />
+          <NavigationProperty Name="Recepcija" Relationship="Model1.RecepcijaRecepcioner" FromRole="Recepcioner" ToRole="Recepcija" />
+        </EntityType>
+        <Association Name="RecepcionerSmjena">
+          <End Type="Model1.Recepcioner" Role="Recepcioner" Multiplicity="*" />
+          <End Type="Model1.Smjena" Role="Smjena" Multiplicity="1" />
+        </Association>
+        <Association Name="HotelSoba">
+          <End Type="Model1.Hotel" Role="Hotel" Multiplicity="1" />
+          <End Type="Model1.Soba" Role="Soba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Id_Hot" />
+            </Principal>
+            <Dependent Role="Soba">
+              <PropertyRef Name="HotelId_Hot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SmjestajSoba">
+          <End Type="Model1.Smjestaj" Role="Smjestaj" Multiplicity="*" />
+          <End Type="Model1.Soba" Role="Soba" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Soba">
+              <PropertyRef Name="Br_Sobe" />
+              <PropertyRef Name="HotelId_Hot" />
+            </Principal>
+            <Dependent Role="Smjestaj">
+              <PropertyRef Name="SobaBr_Sobe" />
+              <PropertyRef Name="SobaHotelId_Hot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RadnikRadnik">
+          <End Type="Model1.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="Model1.Radnik" Role="Radnik1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="JMBG" />
+            </Principal>
+            <Dependent Role="Radnik1">
+              <PropertyRef Name="RadnikJMBG1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RecepcijaRecepcioner">
+          <End Type="Model1.Recepcija" Role="Recepcija" Multiplicity="0..1" />
+          <End Type="Model1.Recepcioner" Role="Recepcioner" Multiplicity="0..1" />
+        </Association>
+        <Association Name="GostRecepcija">
+          <End Type="Model1.Gost" Role="Gost" Multiplicity="*" />
+          <End Type="Model1.Recepcija" Role="Recepcija" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Recepcija">
+              <PropertyRef Name="Br_Rec" />
+              <PropertyRef Name="HotelId_Hot" />
+            </Principal>
+            <Dependent Role="Gost">
+              <PropertyRef Name="RecepcijaBr_Rec" />
+              <PropertyRef Name="RecepcijaHotelId_Hot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Gosts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Gost)">
+        <MappingFragment StoreEntitySet="Gosts">
+          <ScalarProperty Name="MBR" ColumnName="MBR" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Kontakt" ColumnName="Kontakt" />
+          <ScalarProperty Name="Datum_P" ColumnName="Datum_P" />
+          <ScalarProperty Name="Vrijeme_P" ColumnName="Vrijeme_P" />
+          <ScalarProperty Name="RecepcijaBr_Rec" ColumnName="RecepcijaBr_Rec" />
+          <ScalarProperty Name="RecepcijaHotelId_Hot" ColumnName="RecepcijaHotelId_Hot" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hotels">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Hotel)">
+        <MappingFragment StoreEntitySet="Hotels">
+          <ScalarProperty Name="Id_Hot" ColumnName="Id_Hot" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Kategorija" ColumnName="Kategorija" />
+          <ScalarProperty Name="Br_Racuna" ColumnName="Br_Racuna" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Radniks">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Radnik)">
+        <MappingFragment StoreEntitySet="Radniks">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Br_Tel" ColumnName="Br_Tel" />
+          <ScalarProperty Name="RadnikJMBG" ColumnName="RadnikJMBG" />
+          <ScalarProperty Name="HotelId_Hot" ColumnName="HotelId_Hot" />
+          <ScalarProperty Name="RadnikJMBG1" ColumnName="RadnikJMBG1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Recepcioner)">
+        <MappingFragment StoreEntitySet="Radniks_Recepcioner">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Konobar)">
+        <MappingFragment StoreEntitySet="Radniks_Konobar">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Cuvar)">
+        <MappingFragment StoreEntitySet="Radniks_Cuvar">
+          <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Smjenas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Smjena)">
+        <MappingFragment StoreEntitySet="Smjenas">
+          <ScalarProperty Name="Id_Smjene" ColumnName="Id_Smjene" />
+          <ScalarProperty Name="Naz_Smjene" ColumnName="Naz_Smjene" />
+          <ScalarProperty Name="Nap_Smjene" ColumnName="Nap_Smjene" />
+          <ScalarProperty Name="Vrijeme_Od" ColumnName="Vrijeme_Od" />
+          <ScalarProperty Name="Vrijeme_Do" ColumnName="Vrijeme_Do" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recepcijas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Recepcija)">
+        <MappingFragment StoreEntitySet="Recepcijas">
+          <ScalarProperty Name="Br_Rec" ColumnName="Br_Rec" />
+          <ScalarProperty Name="HotelId_Hot" ColumnName="HotelId_Hot" />
+          <ScalarProperty Name="Lokal" ColumnName="Lokal" />
+          <ScalarProperty Name="Mjesto_Rec" ColumnName="Mjesto_Rec" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sobas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Soba)">
+        <MappingFragment StoreEntitySet="Sobas">
+          <ScalarProperty Name="Br_Sobe" ColumnName="Br_Sobe" />
+          <ScalarProperty Name="HotelId_Hot" ColumnName="HotelId_Hot" />
+          <ScalarProperty Name="Tip" ColumnName="Tip" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Smjestajs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Smjestaj)">
+        <MappingFragment StoreEntitySet="Smjestajs">
+          <ScalarProperty Name="Id_Smjestaj" ColumnName="Id_Smjestaj" />
+          <ScalarProperty Name="GostMBR" ColumnName="GostMBR" />
+          <ScalarProperty Name="SobaBr_Sobe" ColumnName="SobaBr_Sobe" />
+          <ScalarProperty Name="SobaHotelId_Hot" ColumnName="SobaHotelId_Hot" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RecepcionerSmjena" TypeName="Model1.RecepcionerSmjena" StoreEntitySet="Radniks_Recepcioner">
+      <EndProperty Name="Smjena">
+        <ScalarProperty Name="Id_Smjene" ColumnName="Smjena_Id_Smjene" />
+      </EndProperty>
+      <EndProperty Name="Recepcioner">
+        <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RecepcijaRecepcioner" TypeName="Model1.RecepcijaRecepcioner" StoreEntitySet="Radniks_Recepcioner">
+      <EndProperty Name="Recepcija">
+        <ScalarProperty Name="Br_Rec" ColumnName="Recepcija_Br_Rec" />
+        <ScalarProperty Name="HotelId_Hot" ColumnName="Recepcija_HotelId_Hot" />
+      </EndProperty>
+      <EndProperty Name="Recepcioner">
+        <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+      </EndProperty>
+      <Condition ColumnName="Recepcija_Br_Rec" IsNull="false" />
+      <Condition ColumnName="Recepcija_HotelId_Hot" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

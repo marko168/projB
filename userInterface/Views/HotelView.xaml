@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="userInterface.Views.HotelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:userInterface.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid >
+        <Button Command="{Binding ShowAddFields_}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="10,10,0,0"> Dodaj</Button>
+        <Button Command="{Binding ShowEditFields_}" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="220,10,0,0"> Izmjeni</Button>
+        <Button Command="{Binding Delete_}" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="430,10,0,0"> Izbrisi</Button>
+
+        <DataGrid Margin="10,50,10,160" CanUserAddRows="False" CanUserDeleteRows="False" Background="AntiqueWhite" ItemsSource="{Binding Hoteli}" SelectedItem="{Binding SelectedHotel}" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Id_Hot}"/>
+                <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Naziv}"/>
+                <DataGridTextColumn Header="Adresa" Width="*" Binding="{Binding Adresa}"/>
+                <DataGridTextColumn Header="Kategorija" Width="*" Binding="{Binding Kategorija}"/>
+                <DataGridTextColumn Header="Broj Racuna" Width="*" Binding="{Binding Br_Racuna}"/>
+                <DataGridTextColumn Header="Telefon" Width="*" Binding="{Binding Telefon}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Visibility="{Binding Visible}">
+            <Label Margin="20,0,0,120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Naziv:</Label>
+            <Label Margin="20,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Adresa:</Label>
+            <Label Margin="20,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Kategorija:</Label>
+            <Label Margin="20,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Broj racuna:</Label>
+            <Label Margin="20,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Telefon:</Label>
+
+            <TextBox Margin="160,0,0,120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Naziv}"></TextBox>
+            <TextBox Margin="160,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Adresa}"></TextBox>
+            <TextBox Margin="160,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Kategorija}"></TextBox>
+            <TextBox Margin="160,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Br_Rac}"></TextBox>
+            <TextBox Margin="160,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Telefon}"></TextBox>
+            
+            <Button Margin="500,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Command="{Binding Add_}" Visibility="{Binding ShowAdd}">Potvrdi</Button>
+            <Button Margin="500,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Command="{Binding Edit_}" Visibility="{Binding ShowEdit}">Potvrdi</Button>
+        </Grid>
+    </Grid>
+</UserControl>

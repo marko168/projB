@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="userInterface.Views.SobaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:userInterface.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid >
+        <Button Command="{Binding ShowAddFields_}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="10,10,0,0">Dodaj</Button>
+        <Button Command="{Binding ShowEditFields_}" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="220,10,0,0">Izmjeni</Button>
+        <Button Command="{Binding Delete_}" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="200" Margin="430,10,0,0">Izbrisi</Button>
+
+        <DataGrid Margin="10,50,10,160" CanUserAddRows="False" CanUserDeleteRows="False" Background="AntiqueWhite" ItemsSource="{Binding Sobe}" SelectedItem="{Binding SelectedSoba}" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Broj Sobe" Width="*" Binding="{Binding Br_Sobe}"/>
+                <DataGridTextColumn Header="Tip sobe" Width="*" Binding="{Binding Tip}"/>
+                <DataGridTextColumn Header="Opis" Width="*" Binding="{Binding Opis}"/>
+                <DataGridTextColumn Header="Napomena" Width="*" Binding="{Binding Napomena}"/>
+                <DataGridTextColumn Header="Hotel" Width="*" Binding="{Binding Hotel.Naziv}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Visibility="{Binding Visible}">
+            <Label Margin="20,0,0,120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Tip:</Label>
+            <Label Margin="20,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Opis:</Label>
+            <Label Margin="20,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130">Napomena:</Label>
+            <Label Margin="20,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="130" Visibility="{Binding ShowAdd}">Hotel:</Label>
+
+            <TextBox Margin="160,0,0,120" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Tip}"></TextBox>
+            <TextBox Margin="160,0,0,90" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Opis}"></TextBox>
+            <TextBox Margin="160,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Text="{Binding Napomena}"></TextBox>
+            <ComboBox Margin="160,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" ItemsSource="{Binding Hoteli}" SelectedItem="{Binding SelectedHotel}" Visibility="{Binding ShowAdd}" DisplayMemberPath="Naziv"></ComboBox>
+
+            <Button Margin="500,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Command="{Binding Add_}" Visibility="{Binding ShowAdd}">Potvrdi</Button>
+            <Button Margin="500,0,0,60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="30" Width="200" Command="{Binding Edit_}" Visibility="{Binding ShowEdit}">Potvrdi</Button>
+        </Grid>
+    </Grid>
+</UserControl>
